@@ -1,0 +1,31 @@
+/**
+*  Predictor for air condirtion from model/5c770e68eba31d065a000723
+*  Predictive model by BigML - Machine Learning Made Easy
+*/
+function predictAirCondirtion(tempc) {
+    if (tempc == null) {
+        return "no";
+    }
+    else if (tempc > 23) {
+        if (tempc > 24) {
+            return "no";
+        }
+        else if (tempc <= 24) {
+            return "no";
+        }
+    }
+    else if (tempc <= 23) {
+        if (tempc > 21) {
+            if (tempc > 22) {
+                return "no";
+            }
+            else if (tempc <= 22) {
+                return "yes";
+            }
+        }
+        else if (tempc <= 21) {
+            return "no";
+        }
+    }
+    return null;
+}

@@ -1,0 +1,5 @@
+In the first picture we see the connection to the Mosca broker and send the data to Dashboard.
+
+In the second picture we see 3 predications we made to the data using Bigml.
+
+In the third picture we did HTTP page with image and we did function that send email when the temp is low.

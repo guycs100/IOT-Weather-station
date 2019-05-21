@@ -1,0 +1,81 @@
+/**
+*  Predictor for Window from model/5c7e4a0ceba31d60a4001dc7
+*  Predictive model by BigML - Machine Learning Made Easy
+*/
+function predictWindow(humi) {
+    if (humi == null) {
+        return "open";
+    }
+    else if (humi > 41) {
+        if (humi > 46) {
+            return "open";
+        }
+        else if (humi <= 46) {
+            if (humi > 42) {
+                if (humi > 44) {
+                    if (humi > 45) {
+                        return "open";
+                    }
+                    else if (humi <= 45) {
+                        return "open";
+                    }
+                }
+                else if (humi <= 44) {
+                    return "open";
+                }
+            }
+            else if (humi <= 42) {
+                return "open";
+            }
+        }
+    }
+    else if (humi <= 41) {
+        if (humi > 40) {
+            return "open";
+        }
+        else if (humi <= 40) {
+            if (humi > 39) {
+                return "close";
+            }
+            else if (humi <= 39) {
+                if (humi > 38) {
+                    return "close";
+                }
+                else if (humi <= 38) {
+                    if (humi > 34) {
+                        if (humi > 37) {
+                            return "close";
+                        }
+                        else if (humi <= 37) {
+                            if (humi > 35) {
+                                if (humi > 36) {
+                                    return "close";
+                                }
+                                else if (humi <= 36) {
+                                    return "close";
+                                }
+                            }
+                            else if (humi <= 35) {
+                                return "close";
+                            }
+                        }
+                    }
+                    else if (humi <= 34) {
+                        if (humi > 32) {
+                            if (humi > 33) {
+                                return "close";
+                            }
+                            else if (humi <= 33) {
+                                return "close";
+                            }
+                        }
+                        else if (humi <= 32) {
+                            return "close";
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return null;
+}

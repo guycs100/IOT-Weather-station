@@ -1,0 +1,156 @@
+/**
+*  Predictor for FuncLight from model/5c7e3854db8b1d6146000588
+*  Predictive model by BigML - Machine Learning Made Easy
+*/
+function predictFunclight(light) {
+    if (light == null) {
+        return "No";
+    }
+    else if (light > 98.02769) {
+        if (light > 123.73146) {
+            if (light > 994.54835) {
+                if (light > 1009.615) {
+                    return "Yes";
+                }
+                else if (light <= 1009.615) {
+                    return "No";
+                }
+            }
+            else if (light <= 994.54835) {
+                if (light > 733.21074) {
+                    if (light > 778.51342) {
+                        if (light > 857.62318) {
+                            if (light > 945.41293) {
+                                return "No";
+                            }
+                            else if (light <= 945.41293) {
+                                if (light > 942.415) {
+                                    return "No";
+                                }
+                                else if (light <= 942.415) {
+                                    if (light > 890.9) {
+                                        return "No";
+                                    }
+                                    else if (light <= 890.9) {
+                                        if (light > 888.4) {
+                                            return "No";
+                                        }
+                                        else if (light <= 888.4) {
+                                            if (light > 858.935) {
+                                                return "No";
+                                            }
+                                            else if (light <= 858.935) {
+                                                return "No";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else if (light <= 857.62318) {
+                            return "No";
+                        }
+                    }
+                    else if (light <= 778.51342) {
+                        if (light > 771.925) {
+                            return "No";
+                        }
+                        else if (light <= 771.925) {
+                            if (light > 746.32) {
+                                return "No";
+                            }
+                            else if (light <= 746.32) {
+                                return "No";
+                            }
+                        }
+                    }
+                }
+                else if (light <= 733.21074) {
+                    return "No";
+                }
+            }
+        }
+        else if (light <= 123.73146) {
+            if (light > 102.49) {
+                return "No";
+            }
+            else if (light <= 102.49) {
+                if (light > 99.47) {
+                    return "No";
+                }
+                else if (light <= 99.47) {
+                    return "Yes";
+                }
+            }
+        }
+    }
+    else if (light <= 98.02769) {
+        if (light > 4.34322) {
+            if (light > 95.81707) {
+                return "Yes";
+            }
+            else if (light <= 95.81707) {
+                if (light > 92.86471) {
+                    return "Yes";
+                }
+                else if (light <= 92.86471) {
+                    if (light > 50.27704) {
+                        return "Yes";
+                    }
+                    else if (light <= 50.27704) {
+                        if (light > 5.0679) {
+                            if (light > 42.08224) {
+                                return "Yes";
+                            }
+                            else if (light <= 42.08224) {
+                                if (light > 17.83448) {
+                                    return "Yes";
+                                }
+                                else if (light <= 17.83448) {
+                                    if (light > 15.34514) {
+                                        return "Yes";
+                                    }
+                                    else if (light <= 15.34514) {
+                                        if (light > 9.49131) {
+                                            return "Yes";
+                                        }
+                                        else if (light <= 9.49131) {
+                                            return "Yes";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else if (light <= 5.0679) {
+                            return "Yes";
+                        }
+                    }
+                }
+            }
+        }
+        else if (light <= 4.34322) {
+            if (light > 3.32977) {
+                if (light > 3.35647) {
+                    if (light > 4.01819) {
+                        if (light > 4.025) {
+                            return "Yes";
+                        }
+                        else if (light <= 4.025) {
+                            return "Yes";
+                        }
+                    }
+                    else if (light <= 4.01819) {
+                        return "Yes";
+                    }
+                }
+                else if (light <= 3.35647) {
+                    return "Yes";
+                }
+            }
+            else if (light <= 3.32977) {
+                return "Yes";
+            }
+        }
+    }
+    return null;
+}

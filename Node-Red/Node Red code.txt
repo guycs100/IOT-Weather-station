@@ -1,0 +1,1060 @@
+[
+    {
+        "id": "64743832.9e2188",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "80177654.6da308",
+        "type": "csv",
+        "z": "64743832.9e2188",
+        "name": "Parse CSV into JSON",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "DateTime,tempC,tempF,humi,currentTemperatureC,currentTemperatureF,barometric-pressure,Altitude,Altitude2,Light",
+        "skip": 0,
+        "x": 340,
+        "y": 340,
+        "wires": [
+            [
+                "a5080ce5.17f71",
+                "810d7651.67d088"
+            ]
+        ]
+    },
+    {
+        "id": "a5080ce5.17f71",
+        "type": "function",
+        "z": "64743832.9e2188",
+        "name": "Add Time Info",
+        "func": "var now = new Date();\nmsg.payload[\"timestamp\"] = now.getTime();\nmsg.payload[\"fomratted-time\"] = now.toUTCString();\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 360,
+        "wires": [
+            [
+                "be898f37.6f44b"
+            ]
+        ]
+    },
+    {
+        "id": "be898f37.6f44b",
+        "type": "link out",
+        "z": "64743832.9e2188",
+        "name": "To Dashboard",
+        "links": [
+            "30c12857.508ba8"
+        ],
+        "x": 775,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "30c12857.508ba8",
+        "type": "link in",
+        "z": "64743832.9e2188",
+        "name": "",
+        "links": [
+            "be898f37.6f44b"
+        ],
+        "x": 95,
+        "y": 500,
+        "wires": [
+            [
+                "b434d675.443798",
+                "479a2b87.9795b4",
+                "26c82dab.a68b02",
+                "c9a5d960.88c1d8"
+            ]
+        ]
+    },
+    {
+        "id": "b434d675.443798",
+        "type": "change",
+        "z": "64743832.9e2188",
+        "name": "Extract Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.tempC",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 460,
+        "wires": [
+            [
+                "5c58ae7a.b8d93",
+                "3f969bf7.d50384"
+            ]
+        ]
+    },
+    {
+        "id": "479a2b87.9795b4",
+        "type": "change",
+        "z": "64743832.9e2188",
+        "name": "Extract Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.humi",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 560,
+        "wires": [
+            [
+                "58b44d31.304164",
+                "b08197af.966448"
+            ]
+        ]
+    },
+    {
+        "id": "26c82dab.a68b02",
+        "type": "change",
+        "z": "64743832.9e2188",
+        "name": "Extract Pressure",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[\"barometric-pressure\"]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 660,
+        "wires": [
+            [
+                "9ca8f9cc.d3e588",
+                "ca0852a2.23711"
+            ]
+        ]
+    },
+    {
+        "id": "5c58ae7a.b8d93",
+        "type": "ui_chart",
+        "z": "64743832.9e2188",
+        "name": "Temperature Chart",
+        "group": "f9d5f1c1.d481f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 570,
+        "y": 440,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "9ca8f9cc.d3e588",
+        "type": "ui_chart",
+        "z": "64743832.9e2188",
+        "name": "Pressure Chart",
+        "group": "dc83f4b0.44cf08",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "x": 560,
+        "y": 640,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "58b44d31.304164",
+        "type": "ui_gauge",
+        "z": "64743832.9e2188",
+        "name": "Humidity Gauge",
+        "group": "19d59079.ed399",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Gauge",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 560,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "3f969bf7.d50384",
+        "type": "ui_text",
+        "z": "64743832.9e2188",
+        "group": "f9d5f1c1.d481f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Temperature Text",
+        "label": "Temperature:",
+        "format": "{{msg.payload}} &deg;C",
+        "layout": "row-left",
+        "x": 570,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "b08197af.966448",
+        "type": "ui_text",
+        "z": "64743832.9e2188",
+        "group": "19d59079.ed399",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Humidity Text",
+        "label": "",
+        "format": "{{msg.payload}} %",
+        "layout": "row-left",
+        "x": 560,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "ca0852a2.23711",
+        "type": "ui_text",
+        "z": "64743832.9e2188",
+        "group": "dc83f4b0.44cf08",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Pressure Text",
+        "label": "Barometric Pressure:",
+        "format": "{{msg.payload}} InHg",
+        "layout": "row-left",
+        "x": 560,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "c9a5d960.88c1d8",
+        "type": "change",
+        "z": "64743832.9e2188",
+        "name": "Extract Light",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[\"Light\"]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 760,
+        "wires": [
+            [
+                "9260b724.081948",
+                "3b19fac2.7e5886"
+            ]
+        ]
+    },
+    {
+        "id": "9260b724.081948",
+        "type": "ui_gauge",
+        "z": "64743832.9e2188",
+        "name": "Light Gauge",
+        "group": "727f036e.df8b0c",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Gauge",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1200",
+        "colors": [
+            "#000000",
+            "#919100",
+            "#faed4b"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 540,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "3b19fac2.7e5886",
+        "type": "ui_text",
+        "z": "64743832.9e2188",
+        "group": "727f036e.df8b0c",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "Light Text",
+        "label": "Light",
+        "format": "{{msg.payload}} %Lum.",
+        "layout": "row-left",
+        "x": 530,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "810d7651.67d088",
+        "type": "mongodb-node",
+        "z": "64743832.9e2188",
+        "mongodb": "ae56b38c.49d3f",
+        "name": "",
+        "collection": "esp32data",
+        "operation": "insert",
+        "upsert": false,
+        "multi": false,
+        "x": 630,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f8607eb.d62698",
+        "type": "function",
+        "z": "64743832.9e2188",
+        "name": "BIGML Air-Conditioner Prediction",
+        "func": "var tempc = parseInt(msg.payload);\nvar ans=0\n    if (tempc === null) {\n        ans=0;\n    }\n    else if (tempc > 23) {\n        if (tempc > 24) {\n            ans=0;\n        }\n        else if (tempc <= 24) {\n            ans=0;\n        }\n    }\n    else if (tempc <= 23) {\n        if (tempc > 21) {\n            if (tempc > 22) {\n                ans=0;\n            }\n            else if (tempc <= 22) {\n                ans=1;\n            }\n        }\n        else if (tempc <= 21) {\n            ans=0;\n        }\n    }\n    msg.payload= ans;\n    return msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 500,
+        "y": 1820,
+        "wires": [
+            [
+                "a295a46f.2ae518"
+            ]
+        ],
+        "inputLabels": [
+            "msg.payload"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "da75542a.221028",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 670,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "a295a46f.2ae518",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 830,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "1c0900ca.b7909f",
+        "type": "e-mail",
+        "z": "64743832.9e2188",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "name": "fadida621@gmail.com",
+        "dname": "Send Alert email",
+        "x": 760,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "538991da.d74ad",
+        "type": "function",
+        "z": "64743832.9e2188",
+        "name": "Humidity Alert",
+        "func": "msg.topic = \"hi fadida\"\nif(msg.payload>75){\n    msg.payload = \"שים לב! הלחות היא \" +msg.payload+ \" יש לתת לקבוצה 5 ציון 100 בקורס\"\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 400,
+        "y": 920,
+        "wires": [
+            [
+                "1c0900ca.b7909f",
+                "da75542a.221028"
+            ]
+        ]
+    },
+    {
+        "id": "a8be13ce.d48c",
+        "type": "mqtt in",
+        "z": "64743832.9e2188",
+        "name": "",
+        "topic": "weather/humi",
+        "qos": "2",
+        "broker": "a4e57b2.bd4cd88",
+        "x": 130,
+        "y": 920,
+        "wires": [
+            [
+                "538991da.d74ad"
+            ]
+        ]
+    },
+    {
+        "id": "3b519b81.9176a4",
+        "type": "mqtt in",
+        "z": "64743832.9e2188",
+        "name": "",
+        "topic": "weather/allinone",
+        "qos": "2",
+        "broker": "a4e57b2.bd4cd88",
+        "x": 100,
+        "y": 160,
+        "wires": [
+            [
+                "80177654.6da308",
+                "1c555564.57371b",
+                "424e6a90.419b94"
+            ]
+        ]
+    },
+    {
+        "id": "96bd5e0b.0e821",
+        "type": "mosca in",
+        "z": "64743832.9e2188",
+        "mqtt_port": 1883,
+        "mqtt_ws_port": 8080,
+        "name": "",
+        "username": "lgmxtoso",
+        "password": "aD054gOOMp1Q",
+        "dburl": "",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c555564.57371b",
+        "type": "mqtt out",
+        "z": "64743832.9e2188",
+        "name": "",
+        "topic": "weather/allinone",
+        "qos": "",
+        "retain": "",
+        "broker": "e49c296.8ba61d8",
+        "x": 440,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "4ede3b89.1e0ce4",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 450,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "41d49c27.7de294",
+        "type": "mongodb-node",
+        "z": "64743832.9e2188",
+        "mongodb": "ae56b38c.49d3f",
+        "name": "",
+        "collection": "esp32data",
+        "operation": "find",
+        "upsert": false,
+        "multi": false,
+        "x": 430,
+        "y": 2460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aac8d34b.da1e1",
+        "type": "function",
+        "z": "64743832.9e2188",
+        "name": "",
+        "func": "msg.payload={\n    \n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 110,
+        "y": 2460,
+        "wires": [
+            [
+                "41d49c27.7de294"
+            ]
+        ]
+    },
+    {
+        "id": "fc0d7a2e.267448",
+        "type": "mqtt out",
+        "z": "64743832.9e2188",
+        "name": "RED",
+        "topic": "weather/red",
+        "qos": "",
+        "retain": "",
+        "broker": "a4e57b2.bd4cd88",
+        "x": 310,
+        "y": 2680,
+        "wires": []
+    },
+    {
+        "id": "2f7310f4.3db28",
+        "type": "inject",
+        "z": "64743832.9e2188",
+        "name": "",
+        "topic": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 2720,
+        "wires": [
+            [
+                "fc0d7a2e.267448"
+            ]
+        ]
+    },
+    {
+        "id": "4c84e940.a94fb8",
+        "type": "mqtt in",
+        "z": "64743832.9e2188",
+        "name": "",
+        "topic": "weather/tempC",
+        "qos": "2",
+        "broker": "a4e57b2.bd4cd88",
+        "x": 140,
+        "y": 1120,
+        "wires": [
+            [
+                "272a648a.942eec"
+            ]
+        ]
+    },
+    {
+        "id": "272a648a.942eec",
+        "type": "function",
+        "z": "64743832.9e2188",
+        "name": "Temp Alert",
+        "func": "msg.topic=\"hi fadida\"\n\nif(msg.payload>1000000)\n{\n    msg.payload=\"לתת 100 לקבוצה 5 המשקיענים\"+msg.payload;\n\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 1120,
+        "wires": [
+            [
+                "719de834.f502c8",
+                "1d469898.c53837"
+            ]
+        ]
+    },
+    {
+        "id": "719de834.f502c8",
+        "type": "e-mail",
+        "z": "64743832.9e2188",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "name": "fadida621@gmail.com",
+        "dname": "",
+        "x": 680,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "1d469898.c53837",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 670,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "374708b8.0155e8",
+        "type": "http response",
+        "z": "64743832.9e2188",
+        "name": "",
+        "x": 850,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "742de5b.7f7401c",
+        "type": "function",
+        "z": "64743832.9e2188",
+        "name": "Set Content-Type header",
+        "func": "msg.headers = {\n    \"Content-Type\":\"image/jpeg\"\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 650,
+        "y": 1940,
+        "wires": [
+            [
+                "374708b8.0155e8"
+            ]
+        ]
+    },
+    {
+        "id": "f754fb8e.ab15c8",
+        "type": "file in",
+        "z": "64743832.9e2188",
+        "name": "",
+        "filename": "C:\\Users\\USER\\Desktop\\team.jpeg",
+        "format": "",
+        "sendError": true,
+        "x": 340,
+        "y": 1940,
+        "wires": [
+            [
+                "742de5b.7f7401c"
+            ]
+        ]
+    },
+    {
+        "id": "fe4bd5c1.bb9e38",
+        "type": "function",
+        "z": "64743832.9e2188",
+        "name": "BIGML Light Prediction",
+        "func": "var light = parseInt(msg.payload);\nvar ans=0;\nfunction predictFunclight(light) {\n    if (light === null) {\n       ans=0;\n    }\n    else if (light > 98.02769) {\n        if (light > 123.73146) {\n            if (light > 994.54835) {\n                if (light > 1009.615) {\n                    ans = 1;\n                }\n                else if (light <= 1009.615) {\n                    ans=0;\n                }\n            }\n            else if (light <= 994.54835) {\n                if (light > 733.21074) {\n                    if (light > 778.51342) {\n                        if (light > 857.62318) {\n                            if (light > 945.41293) {\n                          ans=0;\n                            }\n                            else if (light <= 945.41293) {\n                                if (light > 942.415) {\n                                    ans=0;\n                                }\n                                else if (light <= 942.415) {\n                                    if (light > 890.9) {\n                                        ans=0;\n                                    }\n                                    else if (light <= 890.9) {\n                                        if (light > 888.4) {\n                                            ans=0;\n                                        }\n                                        else if (light <= 888.4) {\n                                            if (light > 858.935) {\n                                                ans=0;\n                                            }\n                                            else if (light <= 858.935) {\n                                                ans=0;                                            }\n                                        }\n                                    }\n                                }\n                            }\n                        }\n                        else if (light <= 857.62318) {\n                            ans=0;\n                        }\n                    }\n                    else if (light <= 778.51342) {\n                        if (light > 771.925) {\n                            ans=0;\n                        }\n                        else if (light <= 771.925) {\n                            if (light > 746.32) {\n                                ans=0;\n                            }\n                            else if (light <= 746.32) {\n                            ans=0;\n                            }\n                        }\n                    }\n                }\n                else if (light <= 733.21074) {\n                    ans=0;\n                }\n            }\n        }\n        else if (light <= 123.73146) {\n            if (light > 102.49) {\n                ans=0;\n            }\n            else if (light <= 102.49) {\n                if (light > 99.47) {\n                    ans=0;\n                }\n                else if (light <= 99.47) {\n                    ans=1;\n                }\n            }\n        }\n    }\n    else if (light <= 98.02769) {\n        if (light > 4.34322) {\n            if (light > 95.81707) {\n                ans=1;\n            }\n            else if (light <= 95.81707) {\n                if (light > 92.86471) {\n                    ans=1;\n                }\n                else if (light <= 92.86471) {\n                    if (light > 50.27704) {\n                        ans=1;\n                    }\n                    else if (light <= 50.27704) {\n                        if (light > 5.0679) {\n                            if (light > 42.08224) {\n                                ans=1;\n                            }\n                            else if (light <= 42.08224) {\n                                if (light > 17.83448) {\n                                    ans=1;\n                                }\n                                else if (light <= 17.83448) {\n                                    if (light > 15.34514) {\n                                        ans=1;\n                                    }\n                                    else if (light <= 15.34514) {\n                                        if (light > 9.49131) {\n                                            ans=1;\n                                        }\n                                        else if (light <= 9.49131) {\n                                           ans=1;\n                                        }\n                                    }\n                                }\n                            }\n                        }\n                        else if (light <= 5.0679) {\n                            ans=1;\n                        }\n                    }\n                }\n            }\n        }\n        else if (light <= 4.34322) {\n            if (light > 3.32977) {\n                if (light > 3.35647) {\n                    if (light > 4.01819) {\n                        if (light > 4.025) {\n                            ans=1;\n                        }\n                        else if (light <= 4.025) {\n                            ans=1;\n                        }\n                    }\n                    else if (light <= 4.01819) {\n                        ans=1;\n                    }\n                }\n                else if (light <= 3.35647) {\n                    ans=1;\n                }\n            }\n            else if (light <= 3.32977) {\n                ans=1;\n            }\n        }\n    }\n    return null;\n}\n    msg.payload= ans;\n    return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 490,
+        "y": 1420,
+        "wires": [
+            [
+                "11e20e0d.c225f2"
+            ]
+        ],
+        "inputLabels": [
+            "msg.payload"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "11e20e0d.c225f2",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 750,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "3de81ba5.458754",
+        "type": "mqtt in",
+        "z": "64743832.9e2188",
+        "name": "Outside Inquiring Source",
+        "topic": "weather/questionצ",
+        "qos": "2",
+        "broker": "a4e57b2.bd4cd88",
+        "x": 150,
+        "y": 1320,
+        "wires": [
+            [
+                "dccadbe1.a4e5a8",
+                "fe4bd5c1.bb9e38"
+            ]
+        ]
+    },
+    {
+        "id": "dccadbe1.a4e5a8",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 490,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "befb3cbf.f41d7",
+        "type": "function",
+        "z": "64743832.9e2188",
+        "name": "BIGML Window Prediction",
+        "func": "/*\n  Predictor for Window from model/5c7e4a0ceba31d60a4001dc7\n*  Predictive model by BigML - Machine Learning Made Easy\n*/\n\nvar light = parseInt(msg.payload);\nvar ans=0;\nfunction predictWindow(humi) {\n    if (humi === null) {\n        ans=1;\n    }\n    else if (humi > 41) {\n        if (humi > 46) {\n            ans=1;\n        }\n        else if (humi <= 46) {\n            if (humi > 42) {\n                if (humi > 44) {\n                    if (humi > 45) {\n                        ans=1;\n                    }\n                    else if (humi <= 45) {\n                        ans=1;\n                    }\n                }\n                else if (humi <= 44) {\n                    ans=1;\n                }\n            }\n            else if (humi <= 42) {\n                ans=1;\n            }\n        }\n    }\n    else if (humi <= 41) {\n        if (humi > 40) {\n            ans=1;\n        }\n        else if (humi <= 40) {\n            if (humi > 39) {\n                ans=0;\n            }\n            else if (humi <= 39) {\n                if (humi > 38) {\n                    ans=0;\n                }\n                else if (humi <= 38) {\n                    if (humi > 34) {\n                        if (humi > 37) {\n                            ans=0;\n                        }\n                        else if (humi <= 37) {\n                            if (humi > 35) {\n                                if (humi > 36) {\n                                    ans=0;\n                                }\n                                else if (humi <= 36) {\n                                    ans=0;\n                                }\n                            }\n                            else if (humi <= 35) {\n                                ans=0;\n                            }\n                        }\n                    }\n                    else if (humi <= 34) {\n                        if (humi > 32) {\n                            if (humi > 33) {\n                                ans=0;\n                            }\n                            else if (humi <= 33) {\n                                ans=0;\n                            }\n                        }\n                        else if (humi <= 32) {\n                            ans=0;\n                        }\n                    }\n                }\n            }\n        }\n    }\n    return null;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 490,
+        "y": 1640,
+        "wires": [
+            [
+                "be283fb8.75ab6"
+            ]
+        ],
+        "inputLabels": [
+            "msg.payload"
+        ],
+        "outputLabels": [
+            "msg.payload"
+        ]
+    },
+    {
+        "id": "be283fb8.75ab6",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 790,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "ac3ef15a.2fa54",
+        "type": "mqtt in",
+        "z": "64743832.9e2188",
+        "name": "Outside Inquiring Source",
+        "topic": "weather/question2",
+        "qos": "2",
+        "broker": "e49c296.8ba61d8",
+        "x": 150,
+        "y": 1560,
+        "wires": [
+            [
+                "33463243.6ea4ce",
+                "befb3cbf.f41d7"
+            ]
+        ]
+    },
+    {
+        "id": "33463243.6ea4ce",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 510,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "5ea42784.5ab228",
+        "type": "mqtt in",
+        "z": "64743832.9e2188",
+        "name": "",
+        "topic": "weather/red",
+        "qos": "2",
+        "broker": "a4e57b2.bd4cd88",
+        "x": 110,
+        "y": 2600,
+        "wires": [
+            [
+                "27b5f095.87f17"
+            ]
+        ]
+    },
+    {
+        "id": "27b5f095.87f17",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 310,
+        "y": 2620,
+        "wires": []
+    },
+    {
+        "id": "22a61cfb.e62404",
+        "type": "http in",
+        "z": "64743832.9e2188",
+        "name": "",
+        "url": "Guy",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 1940,
+        "wires": [
+            [
+                "f754fb8e.ab15c8"
+            ]
+        ]
+    },
+    {
+        "id": "b52429f0.2a8818",
+        "type": "mqtt in",
+        "z": "64743832.9e2188",
+        "name": "Outside Inquiring Source",
+        "topic": "weather/question3",
+        "qos": "2",
+        "broker": "e49c296.8ba61d8",
+        "x": 150,
+        "y": 1820,
+        "wires": [
+            [
+                "4f8607eb.d62698",
+                "4ede3b89.1e0ce4"
+            ]
+        ]
+    },
+    {
+        "id": "424e6a90.419b94",
+        "type": "debug",
+        "z": "64743832.9e2188",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 350,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "238115a.2ee35ea",
+        "type": "inject",
+        "z": "64743832.9e2188",
+        "name": "",
+        "topic": "",
+        "payload": "1010",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 230,
+        "y": 1440,
+        "wires": [
+            [
+                "fe4bd5c1.bb9e38"
+            ]
+        ]
+    },
+    {
+        "id": "f9d5f1c1.d481f",
+        "type": "ui_group",
+        "z": "",
+        "name": "Temperature",
+        "tab": "57416eac.0ce07",
+        "order": 1,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "dc83f4b0.44cf08",
+        "type": "ui_group",
+        "z": "",
+        "name": "Barometric Pressure",
+        "tab": "57416eac.0ce07",
+        "order": 3,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "19d59079.ed399",
+        "type": "ui_group",
+        "z": "",
+        "name": "Humidity",
+        "tab": "57416eac.0ce07",
+        "order": 2,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "727f036e.df8b0c",
+        "type": "ui_group",
+        "z": "",
+        "name": "Light",
+        "tab": "57416eac.0ce07",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "ae56b38c.49d3f",
+        "type": "mongodb-config",
+        "z": "",
+        "hostname": "ds157864.mlab.com",
+        "port": "57864",
+        "db": "iotweather",
+        "name": "wheather123"
+    },
+    {
+        "id": "a4e57b2.bd4cd88",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "e49c296.8ba61d8",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "m15.cloudmqtt.com",
+        "port": "15856",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "57416eac.0ce07",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Living Room Data",
+        "icon": "dashboard",
+        "order": 2
+    }
+]
